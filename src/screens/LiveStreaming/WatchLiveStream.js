@@ -728,8 +728,8 @@ const WatchLiveStream = ({navigation, route}) => {
         }}>
         <View
           style={{
-            paddingTop: StatusBar.currentHeight,
-            paddingHorizontal: 20,
+            // paddingTop: StatusBar.currentHeight,
+            paddingHorizontal: 20,paddingTop:hp(5)
           }}>
           <View
             style={{
@@ -886,7 +886,7 @@ const WatchLiveStream = ({navigation, route}) => {
               style={{
                 alignSelf: 'center',
                 marginTop: 8,
-                marginBottom: -20,
+                marginBottom: hp(3),
               }}>
               <BannerAd
                 unitId={TestIds.BANNER}
