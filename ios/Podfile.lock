@@ -1145,6 +1145,8 @@ PODS:
     - AgoraIrisRTC_iOS (= 4.2.0-build.3)
     - AgoraRtcEngine_iOS (= 4.2.0)
     - React-Core
+  - react-native-date-picker (4.2.13):
+    - React-Core
   - react-native-geolocation-service (5.3.1):
     - React
   - react-native-image-picker (5.4.2):
@@ -1414,6 +1416,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-agora (from `../node_modules/react-native-agora`)
+  - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-maps (from `../node_modules/react-native-maps`)
@@ -1546,6 +1549,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-agora:
     :path: "../node_modules/react-native-agora"
+  react-native-date-picker:
+    :path: "../node_modules/react-native-date-picker"
   react-native-geolocation-service:
     :path: "../node_modules/react-native-geolocation-service"
   react-native-image-picker:
@@ -1690,6 +1695,7 @@ SPEC CHECKSUMS:
   React-jsinspector: b6ed4cb3ffa27a041cd440300503dc512b761450
   React-logger: 186dd536128ae5924bc38ed70932c00aa740cd5b
   react-native-agora: e7232cc1502d4ba176bc74450e9b030f6e51a7d8
+  react-native-date-picker: 04e866ba4e7857f83abd504ad42e787f0f02ae00
   react-native-geolocation-service: 608e1da71a1ac31b4de64d9ef2815f697978c55b
   react-native-image-picker: 77f552291e993f3fdcdf48cc3c280ef7f11789c8
   react-native-maps: 667f9b975549c6fa9b1631bf859440f68ebd3b8f

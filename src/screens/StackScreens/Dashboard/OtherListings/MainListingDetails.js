@@ -699,7 +699,7 @@ const MainListingsDetails = ({ navigation, route }) => {
             style={{
               flexDirection: "row",
               width: wp(90),
-              alignSelf: "center",
+              alignSelf: "center",marginTop:15
             }}
           >
             <View style={styles.btnView1}>
