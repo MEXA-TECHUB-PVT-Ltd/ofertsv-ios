@@ -310,7 +310,7 @@ const LiveUsers = ({navigation, route}) => {
                         }}>
                         {item.stream[0].title
                           ? item.stream[0].title?.slice(0,15)
-                          : 'asdfsadf'}
+                          : 'no title'}
                       </Text>
                       <Text
                         style={{
@@ -320,7 +320,7 @@ const LiveUsers = ({navigation, route}) => {
                         }}>
                         {item.stream[0].description
                           ? item.stream[0].description
-                          : 'asdfsadf'}
+                          : 'no description'}
                       </Text>
                     </View>
                     <View style={{justifyContent: 'flex-end', flex: 1}}>
