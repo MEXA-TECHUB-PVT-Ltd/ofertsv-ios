@@ -44,7 +44,7 @@ const DashboardCard = props => {
         style={[
           styles.dashboardcard,
           {
-            backgroundColor: props?.added_by == 'admin' ? 'purple' : '#FFFFFF',
+            backgroundColor: props?.added_by == 'admin' ? Colors.Appthemecolor : '#FFFFFF',
             width: props.type === 'Exchange_Request' ? wp(90) : wp(45),
             height: props.type === 'Exchange_Request' ? hp(27) : hp(23),
             overflow: 'hidden',
@@ -134,11 +134,11 @@ const DashboardCard = props => {
               <View
                 style={{
                   backgroundColor: props?.promotion?.color
-                    ? props?.promotion?.color
+                    ? Colors.Appthemecolor
                     : '#576AF4',
                   position: 'absolute',
                   left: 0,
-                  borderBottomLeftRadius: 8,
+                  borderBottomRightRadius: 8,
                   paddingHorizontal: 15,
                   paddingTop: 3,
                 }}>
@@ -162,13 +162,14 @@ const DashboardCard = props => {
               <View
                 style={{
                   backgroundColor: props?.promotion?.color
-                    ? props?.promotion?.color
+                    ? Colors.Appthemecolor
                     : '#576AF4',
                   position: 'absolute',
                   left: 0,
-                  borderBottomLeftRadius: 8,
+                  borderBottomRightRadius: 8,
                   paddingHorizontal: 15,
                   paddingTop: 3,
+                  // borderRadius: hp(1),
                 }}>
                 <Text
                   style={{
@@ -209,7 +210,7 @@ const DashboardCard = props => {
           {props?.added_by == 'admin' && (
             <View
               style={{
-                backgroundColor: 'purple',
+                backgroundColor: Colors.Appthemecolor,
                 position: 'absolute',
                 right: 0,
                 borderBottomLeftRadius: 8,
