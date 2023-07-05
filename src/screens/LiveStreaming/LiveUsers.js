@@ -385,7 +385,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: Colors.Appthemecolor,
     position: 'absolute',
-    bottom: 20,
+    bottom: hp(10),
     flexDirection: 'row',
   },
   btnText: {

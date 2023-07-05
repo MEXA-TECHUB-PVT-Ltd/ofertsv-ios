@@ -256,6 +256,7 @@ const CreateLive = ({navigation, route}) => {
             createdAt: firestore.FieldValue.serverTimestamp(),
           };
           console.log('obj : ', obj);
+          setLoading(false)
           firestore()
             .collection('live_stream')
             .doc(stream_id?.toString())
@@ -583,7 +584,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: Colors.Appthemecolor,
     position: 'absolute',
-    bottom: 20,
+    bottom: hp(10),
     flexDirection: 'row',
   },
   btnText: {
