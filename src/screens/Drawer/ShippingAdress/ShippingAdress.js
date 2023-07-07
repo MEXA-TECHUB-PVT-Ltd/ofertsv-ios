@@ -89,8 +89,15 @@ const ShippingAddresss = ({navigation, route}) => {
   });
 
   ////////////LISTING LIKES//////////
-  const create_shippingAddress = async props => {
+  const [user_id, setUser_id] = useState('');
+  const Service = async () => {
     let user_id = await AsyncStorage.getItem('Userid');
+    setUser_id(user_id);
+  };
+  useEffect(() => {
+    Service();
+  }, []);
+  const create_shippingAddress = async props => {
     let data = {
       user_id: user_id,
       country: country_name,

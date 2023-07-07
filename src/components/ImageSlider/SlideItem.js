@@ -87,17 +87,17 @@ const SlideItem = ({item}) => {
           }}
         />
       ) : (
-        <ImageBackground
-          blurRadius={3}
-          resizeMode="cover"
-          source={{uri: IMAGE_URL + item}}
-          style={{flex: 1, justifyContent: 'center'}}>
+        // <ImageBackground
+        //   blurRadius={3}
+        //   resizeMode="cover"
+        //   source={{uri: IMAGE_URL + item}}
+        //   style={{flex: 1, justifyContent: 'center'}}>
           <Animated.Image
             source={{uri: IMAGE_URL + item}}
-            resizeMode="contain"
+            resizeMode="cover"
             style={[styles.image]}
           />
-        </ImageBackground>
+        // </ImageBackground>
       )}
 
       <View

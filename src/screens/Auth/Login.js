@@ -338,8 +338,8 @@ const Login = ({navigation}) => {
 
   useEffect(() => {
     GoogleSignin.configure({
-        androidClientId: 'ADD_YOUR_ANDROID_CLIENT_ID_HERE',
-        iosClientId:
+      androidClientId: 'ADD_YOUR_ANDROID_CLIENT_ID_HERE',
+      iosClientId:
         '286361072761-467kea81cknl1pl9o1i5gllujnb9afu5.apps.googleusercontent.com',
     });
   }, []);
@@ -607,12 +607,29 @@ const Login = ({navigation}) => {
                   flexDirection: 'row',
                   alignItems: 'center',
                 }}>
-                <Checkbox
-                  status={isRemembered ? 'checked' : 'unchecked'}
+                
+                <TouchableOpacity
                   onPress={() => {
                     setIsRemembered(!isRemembered);
-                  }}
-                />
+                  }}>
+                  {isRemembered ? (
+                    <Icon
+                      name="checkmark"
+                      size={28}
+                      color={isRemembered ? Colors.activetextinput : 'white'}
+                    />
+                  ) : (
+                    <View
+                      style={{
+                        width: 22,
+                        height: 22,
+                        borderRadius: 2,
+                        borderWidth: 1,
+                        borderColor: Colors.Appthemecolor,
+                      }}
+                    />
+                  )}
+                </TouchableOpacity>
                 <Text style={{...styles.forgettext, marginBottom: 0}}>
                   {TranslationStrings.REMEMBER_ME}
                 </Text>

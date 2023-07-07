@@ -24,7 +24,7 @@ import IconsTopTabs from '../../../components/TopTabs/IconsTabs/IconsTopTabs';
 //-------------->Dropdowns
 import Categories from '../../../components/Dropdowns/Categories';
 import ProductCondition from '../../../components/Dropdowns/ProductCondition';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 /////////////app styles////////////////
 import styles from './styles';
 import Uploadstyles from '../../../styles/GlobalStyles/Upload';
@@ -68,6 +68,7 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 
 import VideoPlayer from 'react-native-video-player';
 import VideoBottomSheet from '../../../components/CameraBottomSheet/VideoBottomSheet';
+import {colors} from 'react-native-elements';
 
 const UploadItem = ({navigation, route}) => {
   const refRBSheetSubCat = useRef(null);
@@ -386,7 +387,7 @@ const UploadItem = ({navigation, route}) => {
           borderRadius: wp(6),
           overflow: 'hidden',
         }}>
-        <ImageBackground
+        {/* <ImageBackground
           blurRadius={4}
           resizeMode="cover"
           source={{uri: item.path}}
@@ -396,20 +397,20 @@ const UploadItem = ({navigation, route}) => {
             width: '100%',
             justifyContent: 'center',
             overflow: 'hidden',
-          }}>
-          <Image
-            //source={appImages.dogIcon}
-            source={{uri: item.path}}
-            // style={{ height: hp(25), width: wp(80), borderRadius: wp(6) }}
-            style={{
-              height: '100%',
-              width: '100%',
-              // backgroundColor: "white",
-              // borderRadius: wp(6),
-            }}
-            resizeMode="contain"
-          />
-        </ImageBackground>
+          }}> */}
+        <Image
+          //source={appImages.dogIcon}
+          source={{uri: item.path}}
+          // style={{ height: hp(25), width: wp(80), borderRadius: wp(6) }}
+          style={{
+            height: '100%',
+            width: '100%',
+            // backgroundColor: "white",
+            // borderRadius: wp(6),
+          }}
+          resizeMode="cover"
+        />
+        {/* </ImageBackground> */}
         <TouchableOpacity
           onPress={() => navigation.navigate('CameraViewScreen')}
           style={{
@@ -737,14 +738,7 @@ const UploadItem = ({navigation, route}) => {
               <Text style={styles.text}>
                 {TranslationStrings.NO_EXCHANGE_TO_BUY}
               </Text>
-              <Checkbox
-                status={exchangebuychecked ? "checked" : "unchecked"}
-                color={Colors.activetextinput}
-                uncheckedColor={Colors.activetextinput}
-                onPress={() => {
-                  setExchangebuyChecked(!exchangebuychecked);
-                }}
-              />
+              
             </View> */}
             {/* {exchangebuychecked && (
               <Text style={{ color: "red", fontSize: 11 }}>
@@ -761,14 +755,29 @@ const UploadItem = ({navigation, route}) => {
                 alignItems: 'center',
               }}>
               <Text style={styles.text}>{TranslationStrings.FIXED_PRICE}</Text>
-              <Checkbox
-                status={fixedpricechecked ? 'checked' : 'unchecked'}
-                color={Colors.activetextinput}
-                uncheckedColor={Colors.activetextinput}
+              
+              <TouchableOpacity
                 onPress={() => {
                   setFixedpriceChecked(!fixedpricechecked);
-                }}
-              />
+                }}>
+                {fixedpricechecked ? (
+                  <Icon
+                    name="checkmark"
+                    size={28}
+                    color={fixedpricechecked ? Colors.activetextinput : 'white'}
+                  />
+                ) : (
+                  <View
+                    style={{
+                      width: 22,
+                      height: 22,
+                      borderRadius: 2,
+                      borderWidth: 1,
+                      borderColor: Colors.Appthemecolor,
+                    }}
+                  />
+                )}
+              </TouchableOpacity>
             </View>
             {/* {fixedpricechecked && (
               <Text style={{ color: "red", fontSize: 11 }}>
@@ -813,16 +822,31 @@ const UploadItem = ({navigation, route}) => {
                 alignItems: 'center',
               }}>
               <Text style={styles.text}>{TranslationStrings.GIVING_AWAY}</Text>
-              <Checkbox
-                status={givingawaychecked ? 'checked' : 'unchecked'}
-                color={Colors.activetextinput}
-                uncheckedColor={'yellow'}
+             
+              <TouchableOpacity
                 onPress={() => {
                   setGivingawayChecked(!givingawaychecked),
                     setPrice(0),
                     setShippingPrice(0);
-                }}
-              />
+                }}>
+                {givingawaychecked ? (
+                  <Icon
+                    name="checkmark"
+                    size={28}
+                    color={givingawaychecked ? Colors.activetextinput : 'white'}
+                  />
+                ) : (
+                  <View
+                    style={{
+                      width: 22,
+                      height: 22,
+                      borderRadius: 2,
+                      borderWidth: 1,
+                      borderColor: Colors.Appthemecolor,
+                    }}
+                  />
+                )}
+              </TouchableOpacity>
             </View>
             {/* {givingawaychecked && (
               <Text style={{ color: "red", fontSize: 11 }}>

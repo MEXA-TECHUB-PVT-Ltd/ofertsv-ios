@@ -349,19 +349,7 @@ const Home = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            colors={[Colors.Appthemecolor]}
-            onRefresh={() => handleRefresh()}
-          />
-        }>
-        <StatusBar backgroundColor={'white'} barStyle="dark-content" />
-        <Loader isLoading={loading} />
-        <View
+      <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -413,6 +401,70 @@ const Home = ({navigation}) => {
             </TouchableOpacity>
           </View>
         </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            colors={[Colors.Appthemecolor]}
+            onRefresh={() => handleRefresh()}
+          />
+        }>
+        <StatusBar backgroundColor={'white'} barStyle="dark-content" />
+        <Loader isLoading={loading} />
+        {/* <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingHorizontal: wp(5),
+            alignItems: 'center',
+            marginTop: hp(2),
+          }}>
+          <Ionicons
+            name={'menu'}
+            size={30}
+            color={Colors.Appthemecolor}
+            onPress={() => navigation.toggleDrawer()}
+          />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: wp(40),
+            }}>
+            <View style={styles.headericonsview}>
+              <MaterialCommunityIcons
+                name={'filter'}
+                size={25}
+                color={Colors.Appthemecolor}
+                onPress={() => navigation.navigate('Filter')}
+              />
+            </View>
+            <View style={styles.headericonsview}>
+              <Ionicons
+                name={'search'}
+                size={25}
+                color={Colors.Appthemecolor}
+                onPress={() => navigation.navigate('Search')}
+              />
+            </View>
+            <TouchableOpacity
+              // onPress={() => navigation?.navigate("LiveStreaming")}
+              onPress={() => navigation?.navigate('LiveUsers')}
+              style={styles.headericonsview}>
+              <Image
+                source={appImages.live}
+                style={{
+                  width: 27,
+                  height: 27,
+                  resizeMode: 'contain',
+                  tintColor: Colors.Appthemecolor,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+        </View> */}
 
         <View style={{justifyContent: 'center', paddingHorizontal: wp(5)}}>
           <Text style={styles.welcometext}>{TranslationStrings.WELCOME}</Text>
@@ -497,7 +549,7 @@ const Home = ({navigation}) => {
           />
         )}
       </ScrollView>
-      <View
+      {/* <View
         style={{
           position: 'absolute',
           right: wp(6),
@@ -520,7 +572,7 @@ const Home = ({navigation}) => {
             style={{width: '65%', height: '70%', resizeMode: 'contain'}}
           />
         </TouchableOpacity>
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

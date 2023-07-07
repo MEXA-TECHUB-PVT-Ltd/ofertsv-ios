@@ -106,6 +106,7 @@ const CityDropDown = (props) => {
       closeOnDragDown={true}
       closeOnPressMask={false}
       openDuration={50}
+      keyboardAvoidingViewEnabled={false}
       closeDuration={50}
       animationType="fade"
       //height={500}

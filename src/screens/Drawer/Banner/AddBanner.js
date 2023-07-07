@@ -25,7 +25,7 @@ import CamerBottomSheet from '../../../components/CameraBottomSheet/CameraBottom
 import ImagePicker from 'react-native-image-crop-picker';
 
 ////////////////////app date picker pakaage////////////////////
-import DateTimePicker from '@react-native-community/datetimepicker';
+// import DateTimePicker from '@react-native-community/datetimepicker';
 import DatePicker from 'react-native-date-picker';
 /////////////app styles////////////////
 import styles from './styles';
@@ -217,7 +217,7 @@ const AddBanner = ({route}) => {
         type: 'image/jpeg',
       };
 
-      navigation.replace('PaymentMethods', {
+      navigation.navigate('PaymentMethods', {
         type: 'addbanner',
         user_id: user_id,
         start_date: moment(startDate).format('YYYY-MM-DD'),
@@ -490,17 +490,17 @@ const AddBanner = ({route}) => {
               ...Uploadstyles.mainview,
               overflow: 'hidden',
             }}>
-            <ImageBackground
+            {/* <ImageBackground
               blurRadius={4}
               resizeMode="cover"
               source={{uri: user_image}}
-              style={{flex: 1, justifyContent: 'center'}}>
+              style={{flex: 1, justifyContent: 'center'}}> */}
               <Image
                 source={{uri: user_image}}
                 style={{height: hp(20), width: wp(83)}}
-                resizeMode="contain"
+                resizeMode="cover"
               />
-            </ImageBackground>
+            {/* </ImageBackground> */}
           </View>
         )}
         <View>

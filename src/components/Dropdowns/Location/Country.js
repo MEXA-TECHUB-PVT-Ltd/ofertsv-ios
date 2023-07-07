@@ -92,6 +92,7 @@ const CountryDropDown = (props) => {
       openDuration={50}
       closeDuration={50}
       animationType="fade"
+      keyboardAvoidingViewEnabled={false}
       //height={500}
       customStyles={{
         wrapper: {

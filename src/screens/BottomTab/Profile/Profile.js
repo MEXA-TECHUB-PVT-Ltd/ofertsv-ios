@@ -119,12 +119,12 @@ const Profile = ({navigation}) => {
         barStyle="light-content"
       />
       <View style={styles.header}>
-        <View style={{alignSelf: 'flex-end', marginTop: wp(10)}}>
+        <View style={{alignSelf: 'flex-end', marginTop: wp(12),marginRight:wp(1.5)}}>
           <Icon
             name={'settings'}
             size={25}
             color={'white'}
-            style={{marginLeft: wp(30)}}
+            style={{}}
             onPress={() => navigation.navigate('Settings')}
           />
         </View>

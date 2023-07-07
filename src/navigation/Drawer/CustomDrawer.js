@@ -40,7 +40,8 @@ export const DrawerContent = props => {
   const logout = async () => {
     await AsyncStorage.removeItem('Userid');
     // props.navigation.navigate("Login");
-    props.navigation.replace('AuthNav', {screen: 'Login'});
+    setModalVisible(false);
+    props.navigation.navigate('AuthNav', {screen: 'Login'});
   };
   /////////////main menu status states/////////////
   const [username, setUsername] = useState('');
@@ -83,8 +84,8 @@ export const DrawerContent = props => {
                 />
               </TouchableOpacity>
             </View>
-            <View style={{alignSelf: 'center', marginLeft: wp(4)}}>
-              <Title style={styles.title}>{user_fullname}</Title>
+            <View style={{alignSelf: 'center', marginLeft: wp(3)}}>
+              <Title style={styles.title}>{user_fullname?.slice(0, 15)}</Title>
               <Title style={styles.caption}>{username}</Title>
             </View>
           </View>
@@ -268,10 +269,11 @@ export const DrawerContent = props => {
 const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,
+    width: hp(40),
   },
   userInfoSection: {
     marginTop: hp(3),
-    paddingLeft: wp(8),
+    paddingLeft: wp(6),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
@@ -279,10 +281,10 @@ const styles = StyleSheet.create({
   caption: {
     fontSize: hp(1.6),
     fontFamily: fontFamily.Poppins_Regular,
-    lineHeight: 12,
+    marginTop: hp(-1),
   },
   title: {
-    fontSize: hp(2),
+    fontSize: hp(1.9),
     marginTop: hp(5),
     fontFamily: fontFamily.Poppins_SemiBold,
   },
