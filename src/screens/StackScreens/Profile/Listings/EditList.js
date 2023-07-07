@@ -9,7 +9,7 @@ import {
   FlatList,
   ImageBackground,
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 ////////////////////paper////////////////////
 import {Checkbox, Snackbar} from 'react-native-paper';
 
@@ -238,6 +238,7 @@ const EditList = ({navigation, route}) => {
   //Api form validation
   const formValidation = async () => {
     // input validation
+    setloading(1);
     if (title == '') {
       setsnackbarValue({value: 'Please Enter Item Title', color: 'red'});
       setVisible('true');
@@ -251,6 +252,7 @@ const EditList = ({navigation, route}) => {
         value: 'Please Enter Item Description',
         color: 'red',
       });
+      setloading(1);
       setVisible('true');
     } else {
       setloading(1);
@@ -319,7 +321,7 @@ const EditList = ({navigation, route}) => {
           marginRight: index === item_images_array.length - 1 ? wp(0) : wp(2),
           overflow: 'hidden',
         }}>
-        <ImageBackground
+        {/* <ImageBackground
           blurRadius={4}
           resizeMode="cover"
           source={
@@ -333,22 +335,22 @@ const EditList = ({navigation, route}) => {
             justifyContent: 'center',
             overflow: 'hidden',
             borderRadius: 20,
-          }}>
-          <Image
-            source={
-              route.params.navtype === 'edit_list'
-                ? {uri: item?.path ? item?.path : IMAGE_URL + item}
-                : {uri: item.path}
-            }
-            style={{
-              height: hp(20),
-              width: wp(84),
+          }}> */}
+        <Image
+          source={
+            route.params.navtype === 'edit_list'
+              ? {uri: item?.path ? item?.path : IMAGE_URL + item}
+              : {uri: item.path}
+          }
+          style={{
+            height: hp(20),
+            width: wp(84),
 
-              alignSelf: 'center',
-            }}
-            resizeMode="contain"
-          />
-        </ImageBackground>
+            alignSelf: 'center',
+          }}
+          resizeMode="cover"
+        />
+        {/* </ImageBackground> */}
         <TouchableOpacity
           onPress={() => navigation.navigate('CameraViewScreen')}
           style={{
@@ -665,14 +667,7 @@ const EditList = ({navigation, route}) => {
               <Text style={styles.text}>
                 {TranslationStrings.NO_EXCHANGE_TO_BUY}
               </Text>
-              <Checkbox
-                status={exchangebuychecked ? "checked" : "unchecked"}
-                color={Colors.activetextinput}
-                uncheckedColor={Colors.activetextinput}
-                onPress={() => {
-                  setExchangebuyChecked(!exchangebuychecked);
-                }}
-              />
+             
             </View> */}
           </View>
           <View style={{paddingHorizontal: wp(4)}}>
@@ -684,14 +679,29 @@ const EditList = ({navigation, route}) => {
                 alignItems: 'center',
               }}>
               <Text style={styles.text}>{TranslationStrings.FIXED_PRICE}</Text>
-              <Checkbox
-                status={fixedpricechecked ? 'checked' : 'unchecked'}
-                color={Colors.activetextinput}
-                uncheckedColor={Colors.activetextinput}
+              
+              <TouchableOpacity
                 onPress={() => {
                   setFixedpriceChecked(!fixedpricechecked);
-                }}
-              />
+                }}>
+                {fixedpricechecked ? (
+                  <Icon
+                    name="checkmark"
+                    size={28}
+                    color={fixedpricechecked ? Colors.activetextinput : 'white'}
+                  />
+                ) : (
+                  <View
+                    style={{
+                      width: 22,
+                      height: 22,
+                      borderRadius: 2,
+                      borderWidth: 1,
+                      borderColor: Colors.Appthemecolor,
+                    }}
+                  />
+                )}
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -730,18 +740,31 @@ const EditList = ({navigation, route}) => {
                 alignItems: 'center',
               }}>
               <Text style={styles.text}>{TranslationStrings.GIVING_AWAY}</Text>
-              <Checkbox
-                status={givingawaychecked ? 'checked' : 'unchecked'}
-                color={Colors.activetextinput}
-                uncheckedColor={Colors.activetextinput}
+             
+              <TouchableOpacity
                 onPress={() => {
-                  {
-                    setGivingawayChecked(!givingawaychecked),
-                      setPrice(0),
-                      setShippingPrice(0);
-                  }
-                }}
-              />
+                  setGivingawayChecked(!givingawaychecked),
+                    setPrice(0),
+                    setShippingPrice(0);
+                }}>
+                {givingawaychecked ? (
+                  <Icon
+                    name="checkmark"
+                    size={28}
+                    color={givingawaychecked ? Colors.activetextinput : 'white'}
+                  />
+                ) : (
+                  <View
+                    style={{
+                      width: 22,
+                      height: 22,
+                      borderRadius: 2,
+                      borderWidth: 1,
+                      borderColor: Colors.Appthemecolor,
+                    }}
+                  />
+                )}
+              </TouchableOpacity>
             </View>
             {/* {givingawaychecked && (
               <Text style={{ color: "red", fontSize: 11 }}>
@@ -771,14 +794,7 @@ const EditList = ({navigation, route}) => {
           }}
         >
           <Text style={styles.text}>Exchange to Buy</Text>
-          <Checkbox
-            status={exchangebuychecked ? "checked" : "unchecked"}
-            color={Colors.activetextinput}
-            uncheckedColor={Colors.activetextinput}
-            onPress={() => {
-              setExchangebuyChecked(!exchangebuychecked);
-            }}
-          />
+          
         </View> */}
         {/* <View
           style={{
@@ -790,14 +806,7 @@ const EditList = ({navigation, route}) => {
           }}
         >
           <Text style={styles.text}>Fixed Price</Text>
-          <Checkbox
-            status={fixedpricechecked ? "checked" : "unchecked"}
-            color={Colors.activetextinput}
-            uncheckedColor={Colors.activetextinput}
-            onPress={() => {
-              setFixedpriceChecked(!fixedpricechecked);
-            }}
-          />
+          
         </View> */}
         {/* {fixedpricechecked === true || exchangebuychecked === true ? null : ( */}
         {/* <View
@@ -810,18 +819,7 @@ const EditList = ({navigation, route}) => {
           }}
         >
           <Text style={styles.text}>Giving Away</Text>
-          <Checkbox
-            status={givingawaychecked ? "checked" : "unchecked"}
-            color={Colors.activetextinput}
-            uncheckedColor={Colors.activetextinput}
-            onPress={() => {
-              {
-                setGivingawayChecked(!givingawaychecked),
-                  setPrice(0),
-                  setShippingPrice(0);
-              }
-            }}
-          />
+         
         </View> */}
         {/* )} */}
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {useEffect, useState, useRef} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -7,62 +7,60 @@ import {
   TouchableOpacity,
   StatusBar,
   Text,
-} from "react-native";
+} from 'react-native';
 
 ///////////////app components////////////////
-import CustomButtonhere from "../../../components/Button/CustomButton";
-import CustomModal from "../../../components/Modal/CustomModal";
-import CustomTextInput from "../../../components/TextInput/CustomTextInput";
-import CustomHeader from "../../../components/Header/CustomHeader";
-import CamerBottomSheet from "../../../components/CameraBottomSheet/CameraBottomSheet";
+import CustomButtonhere from '../../../components/Button/CustomButton';
+import CustomModal from '../../../components/Modal/CustomModal';
+import CustomTextInput from '../../../components/TextInput/CustomTextInput';
+import CustomHeader from '../../../components/Header/CustomHeader';
+import CamerBottomSheet from '../../../components/CameraBottomSheet/CameraBottomSheet';
 
 ////////////////app pakages////////////
-import { Snackbar } from "react-native-paper";
+import {Snackbar} from 'react-native-paper';
 
 /////////////app styles///////////////////
-import styles from "./styles";
+import styles from './styles';
 
 //////////height and width/////////////
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
-} from "react-native-responsive-screen";
+} from 'react-native-responsive-screen';
 
 ///////////upload image///////////////
-import RNFetchBlob from "rn-fetch-blob";
+import RNFetchBlob from 'rn-fetch-blob';
 
 ////////////////////redux////////////
-import { useSelector, useDispatch } from "react-redux";
-import { setUserImage } from "../../../redux/actions";
-import { setCountryName, setCityName } from "../../../redux/Location/actions";
+import {useSelector, useDispatch} from 'react-redux';
+import {setUserImage} from '../../../redux/actions';
+import {setCountryName, setCityName} from '../../../redux/Location/actions';
 
 ////////////////////app images////////
-import { appImages } from "../../../constant/images";
+import {appImages} from '../../../constant/images';
 
 //////////////////////////app api/////////////////////////
-import axios from "axios";
-import { BASE_URL, IMAGE_URL } from "../../../utills/ApiRootUrl";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from 'axios';
+import {BASE_URL, IMAGE_URL} from '../../../utills/ApiRootUrl';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 ///////////////api functions///////////
-import { get_Login_UserData, get_user_status } from "../../../api/GetApis";
-import BlockUserView from "../../../components/BlockUserView";
-import TranslationStrings from "../../../utills/TranslationStrings";
+import {get_Login_UserData, get_user_status} from '../../../api/GetApis';
+import BlockUserView from '../../../components/BlockUserView';
+import TranslationStrings from '../../../utills/TranslationStrings';
 
-import Loader from "../../../components/Loader/Loader";
+import Loader from '../../../components/Loader/Loader';
 
-const EditProfile = ({ navigation, route }) => {
+const EditProfile = ({navigation, route}) => {
   /////////////previous data////////////
   const [predata] = useState(route.params);
 
   /////////////////////////redux///////////////////
-  const { user_image } = useSelector((state) => state.userReducer);
+  const {user_image} = useSelector(state => state.userReducer);
   const dispatch = useDispatch();
 
   /////////////////////////redux///////////////////
-  const { country_name, city_name } = useSelector(
-    (state) => state.locationReducer
-  );
+  const {country_name, city_name} = useSelector(state => state.locationReducer);
 
   //Modal States
   const [modalVisible, setModalVisible] = useState(false);
@@ -78,7 +76,7 @@ const EditProfile = ({ navigation, route }) => {
   const [loading, setloading] = useState(0);
   const [disable, setdisable] = useState(0);
   const [visible, setVisible] = useState(false);
-  const [snackbarValue, setsnackbarValue] = useState({ value: "", color: "" });
+  const [snackbarValue, setsnackbarValue] = useState({value: '', color: ''});
   const onDismissSnackBar = () => setVisible(false);
 
   //camera and imagepicker
@@ -90,19 +88,19 @@ const EditProfile = ({ navigation, route }) => {
   const [fname, setfname] = React.useState();
   const [lname, setlname] = React.useState();
   const [email, setEmail] = React.useState();
-  const [phoneNo, setPhoneNo] = useState("");
+  const [phoneNo, setPhoneNo] = useState('');
 
   const [showBlockModal, setShowBlockModal] = useState(false);
   //////////////////////Api Calling/////////////////
   const Edit_User_Profile = async () => {
-    let user_status = await AsyncStorage.getItem("account_status");
+    let user_status = await AsyncStorage.getItem('account_status');
 
-    if (user_status == "block") {
+    if (user_status == 'block') {
       setShowBlockModal(true);
       return;
     }
     setloading(true);
-    var user_id = await AsyncStorage.getItem("Userid");
+    var user_id = await AsyncStorage.getItem('Userid');
     var data = JSON.stringify({
       user_id: user_id,
       full_name: fname,
@@ -111,11 +109,11 @@ const EditProfile = ({ navigation, route }) => {
     });
 
     var config = {
-      method: "put",
+      method: 'put',
       maxBodyLength: Infinity,
-      url: BASE_URL + "updateProfile.php",
+      url: BASE_URL + 'updateProfile.php',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       data: data,
     };
@@ -128,12 +126,14 @@ const EditProfile = ({ navigation, route }) => {
       .catch(function (error) {
         console.log(error);
       })
-      .finally(() => setloading(false));
+      .finally(() => {
+        setloading(false), navigation.goBack();
+      });
   };
   const get_user_data = () => {
     setIsDataLoading(true);
     get_Login_UserData()
-      .then((response) => {
+      .then(response => {
         if (response?.data?.image) {
           dispatch(setUserImage(IMAGE_URL + response?.data?.image));
         }
@@ -151,7 +151,7 @@ const EditProfile = ({ navigation, route }) => {
   }, []);
 
   /////////error stateand function/////////
-  const [email_error, setEmailError] = useState("");
+  const [email_error, setEmailError] = useState('');
   const onpressemail = () => {
     // setEmailError("you can't edit your email");
     setEmailError(TranslationStrings.YOU_CANNOT_EDIT_YOUR_EMAIL);
@@ -160,9 +160,8 @@ const EditProfile = ({ navigation, route }) => {
     <SafeAreaView style={styles.container}>
       <ScrollView
         showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-      >
-        <StatusBar backgroundColor={"#26295E"} barStyle="light-content" />
+        showsVerticalScrollIndicator={false}>
+        <StatusBar backgroundColor={'#26295E'} barStyle="light-content" />
 
         <Loader isLoading={isDataLoading} />
 
@@ -171,16 +170,16 @@ const EditProfile = ({ navigation, route }) => {
           iconPress={() => {
             navigation.goBack();
           }}
-          icon={"arrow-back"}
-          type={"singleicon"}
+          icon={'arrow-back'}
+          type={'singleicon'}
         />
 
         <View>
           <View style={styles.userimage}>
-            {user_image != "" ? (
+            {user_image != '' ? (
               <TouchableOpacity onPress={() => refRBSheet.current.open()}>
                 <Image
-                  source={{ uri: user_image }}
+                  source={{uri: user_image}}
                   style={styles.image}
                   resizeMode="contain"
                 />
@@ -189,7 +188,7 @@ const EditProfile = ({ navigation, route }) => {
               <TouchableOpacity onPress={() => refRBSheet.current.open()}>
                 <Image
                   source={appImages.User}
-                  style={{ width: wp(10), height: hp(5) }}
+                  style={{width: wp(10), height: hp(5)}}
                   resizeMode="contain"
                 />
               </TouchableOpacity>
@@ -197,20 +196,19 @@ const EditProfile = ({ navigation, route }) => {
             <TouchableOpacity
               onPress={() => refRBSheet.current.open()}
               style={{
-                position: "absolute",
+                position: 'absolute',
                 bottom: hp(0),
                 right: wp(0),
                 width: wp(12),
                 height: hp(6),
                 borderRadius: hp(6) / 2,
-              }}
-            >
+              }}>
               <Image
                 source={appImages.Camera}
                 style={{
                   width: wp(12),
                   height: hp(6),
-                  position: "absolute",
+                  position: 'absolute',
                   bottom: hp(0),
                   right: wp(0),
                 }}
@@ -221,59 +219,59 @@ const EditProfile = ({ navigation, route }) => {
           <View>
             <CustomTextInput
               icon={appImages.email}
-              type={"withouticoninput"}
+              type={'withouticoninput'}
               term={username}
-              returnType={"next"}
+              returnType={'next'}
               onNext={() => {
                 ref_input2.current.focus();
               }}
               placeholder={TranslationStrings.ENTER_USERNAME}
-              onTermChange={(newUsername) => setusername(newUsername)}
+              onTermChange={newUsername => setusername(newUsername)}
             />
             <CustomTextInput
               onRef={ref_input2}
               icon={appImages.lock}
-              type={"withouticoninput"}
+              type={'withouticoninput'}
               term={fname}
-              returnType={"next"}
+              returnType={'next'}
               onNext={() => {
                 ref_input3.current.focus();
               }}
               placeholder={TranslationStrings.ENTER_FIRST_NAME}
-              onTermChange={(newFname) => setfname(newFname)}
+              onTermChange={newFname => setfname(newFname)}
             />
             <CustomTextInput
               onRef={ref_input3}
               icon={appImages.lock}
-              type={"withouticoninput"}
+              type={'withouticoninput'}
               term={lname}
               placeholder={TranslationStrings.ENTER_LAST_NAME}
-              onTermChange={(newLname) => setlname(newLname)}
+              onTermChange={newLname => setlname(newLname)}
             />
 
             <CustomTextInput
               onRef={ref_input4}
               icon={appImages.lock}
-              type={"withouticoninput"}
+              type={'withouticoninput'}
               term={phoneNo}
               placeholder={TranslationStrings.ENTER_PHONE_NUMBER}
-              keyboard_type={"number-pad"}
-              onTermChange={(text) => setPhoneNo(text)}
+              keyboard_type={'number-pad'}
+              onTermChange={text => setPhoneNo(text)}
             />
 
             <TouchableOpacity onPress={() => onpressemail()}>
               <CustomTextInput
                 onRef={ref_input3}
                 icon={appImages.lock}
-                type={"withouticoninput"}
+                type={'withouticoninput'}
                 term={email}
                 editable={false}
                 disable={false}
                 placeholder="Enter Email"
-                onTermChange={(newLname) => setlname(newLname)}
+                onTermChange={newLname => setlname(newLname)}
               />
             </TouchableOpacity>
-            <Text style={{ color: "red", marginLeft: wp(10) }}>
+            <Text style={{color: 'red', marginLeft: wp(10)}}>
               {email_error}
             </Text>
             {/* <TouchableOpacity onPress={() => refCountryddRBSheet.current.open()}>
@@ -306,7 +304,7 @@ const EditProfile = ({ navigation, route }) => {
           </TouchableOpacity> */}
           </View>
         </View>
-        <View style={{ flex: 0.7, marginTop: hp(0), marginBottom: hp(20) }}>
+        <View style={{flex: 0.7, marginTop: hp(0), marginBottom: hp(20)}}>
           <CustomButtonhere
             title={TranslationStrings.UPDATE}
             widthset={80}
@@ -321,9 +319,9 @@ const EditProfile = ({ navigation, route }) => {
         <CamerBottomSheet
           refRBSheet={refRBSheet}
           onClose={() => refRBSheet.current.close()}
-          title={"From Gallery"}
-          type={"onepic"}
-          type1={"editProfile"}
+          title={'From Gallery'}
+          type={'onepic'}
+          type1={'editProfile'}
         />
         <Snackbar
           duration={400}
@@ -333,8 +331,7 @@ const EditProfile = ({ navigation, route }) => {
             backgroundColor: snackbarValue.color,
             marginBottom: hp(20),
             zIndex: 999,
-          }}
-        >
+          }}>
           {snackbarValue.value}
         </Snackbar>
         <BlockUserView

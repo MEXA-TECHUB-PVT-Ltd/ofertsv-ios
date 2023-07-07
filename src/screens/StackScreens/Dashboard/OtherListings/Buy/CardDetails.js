@@ -16,7 +16,7 @@ import CustomHeader from "../../../../../components/Header/CustomHeader";
 import CustomButtonhere from "../../../../../components/Button/CustomButton";
 import CustomTextInput from "../../../../../components/TextInput/CustomTextInput";
 import CustomModal from "../../../../../components/Modal/CustomModal";
-
+import Icon from 'react-native-vector-icons/Ionicons'
 ////////////////country picker package/////////////
 import CountryPicker from "react-native-country-picker-modal";
 
@@ -626,13 +626,28 @@ const CardDetails = ({ navigation, route }) => {
           <Text style={styles.timelinetext}>
             {TranslationStrings.SAVE_CARD}
           </Text>
-          <Checkbox
-            status={checked ? "checked" : "unchecked"}
-            color={Colors.activetextinput}
-            onPress={() => {
-              setChecked(!checked);
-            }}
-          />
+          <TouchableOpacity
+                  onPress={() => {
+                    setChecked(!checked);
+                  }}>
+                  {checked ? (
+                    <Icon
+                      name="checkmark"
+                      size={28}
+                      color={checked ? Colors.activetextinput : 'white'}
+                    />
+                  ) : (
+                    <View
+                      style={{
+                        width: 22,
+                        height: 22,
+                        borderRadius: 2,
+                        borderWidth: 1,
+                        borderColor: Colors.Appthemecolor,
+                      }}
+                    />
+                  )}
+                </TouchableOpacity>
         </View>
 
         <View style={{ marginBottom: hp(15) }}>

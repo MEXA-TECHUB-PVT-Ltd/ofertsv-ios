@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {useEffect, useState, useRef} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -6,36 +6,36 @@ import {
   View,
   Text,
   TouchableOpacity,
-} from "react-native";
+} from 'react-native';
 
 ////////////////////paper////////////////////
-import { Checkbox } from "react-native-paper";
+import {Checkbox} from 'react-native-paper';
 
 //////////////////app components///////////////
-import CustomHeader from "../../../components/Header/CustomHeader";
-import CustomButtonhere from "../../../components/Button/CustomButton";
-import CustomTextInput from "../../../components/TextInput/CustomTextInput";
-
+import CustomHeader from '../../../components/Header/CustomHeader';
+import CustomButtonhere from '../../../components/Button/CustomButton';
+import CustomTextInput from '../../../components/TextInput/CustomTextInput';
+import Icon from 'react-native-vector-icons/Ionicons'
 ////////////////country picker package/////////////
-import CountryPicker from "react-native-country-picker-modal";
+import CountryPicker from 'react-native-country-picker-modal';
 
 /////////////app styles////////////////
-import styles from "./styles";
-import Colors from "../../../utills/Colors";
+import styles from './styles';
+import Colors from '../../../utills/Colors';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+} from 'react-native-responsive-screen';
 
 //////////////////////////app api/////////////////////////
-import axios from "axios";
-import { BASE_URL } from "../../../utills/ApiRootUrl";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from 'axios';
+import {BASE_URL} from '../../../utills/ApiRootUrl';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /////////////////////app images/////////////////////
-import { appImages } from "../../../constant/images";
+import {appImages} from '../../../constant/images';
 
-const PaymentMethod = ({ navigation, route }) => {
+const PaymentMethod = ({navigation, route}) => {
   ///////////checkbox/////////////
   const [checked, setChecked] = React.useState(false);
 
@@ -47,16 +47,15 @@ const PaymentMethod = ({ navigation, route }) => {
 
   ////////////country picker states/////////////
   const [CountryPickerView, setCountryPickerView] = useState(false);
-  const [countryCode, setCountryCode] = useState("92");
-  const [countryname, setCountryName] = useState("Pak");
+  const [countryCode, setCountryCode] = useState('92');
+  const [countryname, setCountryName] = useState('Pak');
 
   useEffect(() => {}, []);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-      >
+        showsHorizontalScrollIndicator={false}>
         {CountryPickerView == true ? (
           <CountryPicker
             withFilter={true}
@@ -65,15 +64,15 @@ const PaymentMethod = ({ navigation, route }) => {
             withFlag={true}
             withFlagButton={true}
             withCountryNameButton={true}
-            onSelect={(e) => {
-              console.log("country here", e);
-              var name = e.name.substring("4");
+            onSelect={e => {
+              console.log('country here', e);
+              var name = e.name.substring('4');
               setCountryPickerView(false);
-              if (e.name === "Antarctica") {
-                setCountryCode("672");
+              if (e.name === 'Antarctica') {
+                setCountryCode('672');
               }
-              if (e.name === "Bouvet Island") {
-                setCountryCode("55");
+              if (e.name === 'Bouvet Island') {
+                setCountryCode('55');
               } else {
                 setCountryCode(JSON.parse(e.callingCode));
               }
@@ -81,7 +80,7 @@ const PaymentMethod = ({ navigation, route }) => {
               //setCountryCode(JSON.parse(e.callingCode))
               setCountryName(e.name);
             }}
-            onClose={(e) => {
+            onClose={e => {
               setCountryPickerView(false);
             }}
             visible={CountryPickerView}
@@ -90,75 +89,88 @@ const PaymentMethod = ({ navigation, route }) => {
           <View></View>
         )}
         <CustomHeader
-          headerlabel={"Payment Method"}
+          headerlabel={'Payment Method'}
           iconPress={() => {
             navigation.goBack();
           }}
-          icon={"arrow-back"}
+          icon={'arrow-back'}
         />
 
         <View>
           <CustomTextInput
-            type={"withouticoninput"}
-            texterror={"invalid"}
+            type={'withouticoninput'}
+            texterror={'invalid'}
             term={cardno}
             placeholder="Enter Card Number"
-            onTermChange={(newUsername) => setCardNo(newUsername)}
+            onTermChange={newUsername => setCardNo(newUsername)}
           />
           <CustomTextInput
-            type={"withouticoninput"}
+            type={'withouticoninput'}
             term={expirydate}
             placeholder="expiry date ( MM/YY )"
-            onTermChange={(newFname) => setExpiryDate(newFname)}
+            onTermChange={newFname => setExpiryDate(newFname)}
           />
           <CustomTextInput
-            type={"withouticoninput"}
+            type={'withouticoninput'}
             term={cvv}
             placeholder="Enter CVC"
-            onTermChange={(newCvv) => setCvv(newCvv)}
+            onTermChange={newCvv => setCvv(newCvv)}
           />
           <TouchableOpacity
             onPress={() => {
               setCountryPickerView(true);
-            }}
-          >
+            }}>
             <CustomTextInput
               icon={appImages.downarrow}
-              type={"iconinput"}
+              type={'iconinput'}
               term={countryname}
               editable={false}
               disable={false}
               placeholder="Select Country"
-              onTermChange={(newcountry) => setCountryName(newcountry)}
+              onTermChange={newcountry => setCountryName(newcountry)}
             />
           </TouchableOpacity>
         </View>
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
+            flexDirection: 'row',
+            justifyContent: 'space-between',
             paddingHorizontal: wp(8),
             marginTop: hp(2),
-            alignItems: "center",
-          }}
-        >
+            alignItems: 'center',
+          }}>
           <Text style={styles.text}>Giving Away</Text>
-          <Checkbox
-            status={checked ? "checked" : "unchecked"}
-            color={Colors.activetextinput}
-            uncheckedColor={Colors.activetextinput}
+          
+          <TouchableOpacity
             onPress={() => {
               setChecked(!checked);
-            }}
-          />
+            }}>
+            {checked ? (
+              <Icon
+                name="checkmark"
+                size={28}
+                color={checked ? Colors.activetextinput : 'white'}
+              />
+            ) : (
+              <View
+                style={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: 2,
+                  borderWidth: 1,
+                  borderColor: Colors.Appthemecolor,
+                }}
+              />
+            )}
+          </TouchableOpacity>
         </View>
-        <View style={{ marginBottom: hp(15) }}>
+        <View style={{marginBottom: hp(15)}}>
           <CustomButtonhere
-            title={"PAY"}
+            title={'PAY'}
             widthset={80}
             topDistance={10}
             onPress={() => {
-              navigation.navigate("Drawerroute");
+              navigation.navigate('Drawerroute');
             }}
           />
         </View>

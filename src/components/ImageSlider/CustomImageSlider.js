@@ -92,14 +92,14 @@ const CustomImageSlider = ({ imagearray, type }) => {
                     >
                       <Text style={styles.btnChangeText}>Change</Text>
                     </TouchableOpacity>
-                    <ImageBackground
+                    {/* <ImageBackground
                       blurRadius={4}
                       resizeMode="cover"
                       source={{
                         uri: item?.path,
                       }}
                       style={{ flex: 1, justifyContent: "center" }}
-                    >
+                    > */}
                       <Image
                         source={{
                           uri: item?.path,
@@ -108,9 +108,9 @@ const CustomImageSlider = ({ imagearray, type }) => {
                           width: "100%",
                           height: "100%",
                         }}
-                        resizeMode={"contain"}
+                        resizeMode={"cover"}
                       />
-                    </ImageBackground>
+                    {/* </ImageBackground> */}
                   </View>
                 ) : type == "edit_item" ? (
                   <View style={styles.sliderCard}>
@@ -120,14 +120,14 @@ const CustomImageSlider = ({ imagearray, type }) => {
                     >
                       <Text style={styles.btnChangeText}>Change</Text>
                     </TouchableOpacity>
-                    <ImageBackground
+                    {/* <ImageBackground
                       blurRadius={4}
                       resizeMode="cover"
                       source={{
                         uri: item?.path ? item?.path : IMAGE_URL + item,
                       }}
                       style={{ flex: 1, justifyContent: "center" }}
-                    >
+                    > */}
                       <Image
                         source={{
                           uri: item?.path ? item?.path : IMAGE_URL + item,
@@ -136,9 +136,9 @@ const CustomImageSlider = ({ imagearray, type }) => {
                           width: "100%",
                           height: "100%",
                         }}
-                        resizeMode={"contain"}
+                        resizeMode={"cover"}
                       />
-                    </ImageBackground>
+                    {/* </ImageBackground> */}
                   </View>
                 ) : (
                   <TouchableOpacity
@@ -153,14 +153,14 @@ const CustomImageSlider = ({ imagearray, type }) => {
                     }}
                     style={styles.sliderCard}
                   >
-                    <ImageBackground
-                      blurRadius={4}
+                    {/* <ImageBackground
+                      // blurRadius={4}
                       resizeMode="cover"
                       source={{
                         uri: `${IMAGE_URL}${item?.app_img}`,
                       }}
                       style={{ flex: 1, justifyContent: "center" }}
-                    >
+                    > */}
                       <Image
                         source={{
                           uri: `${IMAGE_URL}${item?.app_img}`,
@@ -169,9 +169,9 @@ const CustomImageSlider = ({ imagearray, type }) => {
                           width: "100%",
                           height: "100%",
                         }}
-                        resizeMode={"contain"}
+                        resizeMode={"cover"}
                       />
-                    </ImageBackground>
+                    {/* </ImageBackground> */}
                   </TouchableOpacity>
                 )}
               </>

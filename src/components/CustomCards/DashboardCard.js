@@ -9,10 +9,10 @@ import {
 
 ////////////react native paper/////////////
 import {Checkbox} from 'react-native-paper';
-
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 /////////////styles///////////////
 import styles from './styles';
-
+import Icon from 'react-native-vector-icons/Ionicons'
 /////////////colors////////////
 import Colors from '../../utills/Colors';
 import {
@@ -44,24 +44,35 @@ const DashboardCard = props => {
         style={[
           styles.dashboardcard,
           {
-            backgroundColor: props?.added_by == 'admin' ? Colors.Appthemecolor : '#FFFFFF',
+            backgroundColor:
+              props?.added_by == 'admin'
+                ? Colors.Appthemecolor
+                : props?.promotion?.tag == 'urgent' ||
+                  props?.promotion?.tag == 'Urgent' ||
+                  props?.promotion?.tag == 'Advertised' ||
+                  props?.promotion?.tag == 'Advertisement'
+                ? '#90EE90'
+                : '#fff',
             width: props.type === 'Exchange_Request' ? wp(90) : wp(45),
             height: props.type === 'Exchange_Request' ? hp(27) : hp(23),
-            overflow: 'hidden',
+            // overflow: 'hidden',
           },
         ]}>
         <View style={{marginBottom: hp(0), marginTop: hp(0)}}>
           {props?.image ? (
-            <ImageBackground
-              blurRadius={4}
-              resizeMode="cover"
-              source={{uri: props.image}}
-              style={{
-                // ...styles.dasboardimage,
-                // flex: 1,
-                justifyContent: 'center',
-              }}>
+            // <ImageBackground
+            //   blurRadius={4}
+            //   resizeMode="cover"
+            //   source={{uri: props.image}}
+            //   style={{
+            //     // ...styles.dasboardimage,
+            //     // flex: 1,
+            //     justifyContent: 'center',
+            //   }}>
+            <>
               <Image
+                borderTopLeftRadius={wp(3)}
+                borderTopRightRadius={wp(3)}
                 source={{uri: props.image}}
                 style={[
                   // styles.dasboardimage,
@@ -70,19 +81,22 @@ const DashboardCard = props => {
                     height: props.type === 'Exchange_Request' ? hp(18) : hp(15),
                   },
                 ]}
-                resizeMode="contain"></Image>
+                resizeMode="cover"
+              />
               {props?.video && (
                 <View
                   style={{
                     position: 'absolute',
                     right: 0,
                     left: 0,
+                    top: 50,
+                    bottom: 50,
                     alignItems: 'center',
                   }}>
                   <AntDesign name="play" color={'white'} size={30} />
                 </View>
               )}
-            </ImageBackground>
+            </>
           ) : (
             <View
               style={{
@@ -90,12 +104,9 @@ const DashboardCard = props => {
                 height: props.type === 'Exchange_Request' ? hp(18) : hp(15),
                 alignItems: 'center',
                 justifyContent: 'center',
+                backgroundColor: 'white',
               }}>
-              <Image
-                source={appImages.no_image}
-                style={{height: 80, width: 80, tintColor: 'gray'}}
-                resizeMode="contain"
-              />
+              <FontAwesome name="image" size={33} color="#AAAAAA" />
             </View>
           )}
 
@@ -134,20 +145,21 @@ const DashboardCard = props => {
               <View
                 style={{
                   backgroundColor: props?.promotion?.color
-                    ? Colors.Appthemecolor
+                    ? '#90EE90'
                     : '#576AF4',
                   position: 'absolute',
                   left: 0,
                   borderBottomRightRadius: 8,
-                  paddingHorizontal: 15,
-                  paddingTop: 3,
+                  borderTopLeftRadius: 8,
+                  paddingHorizontal: 21,
+                  paddingVertical: 3,
                 }}>
                 <Text
                   style={{
                     fontSize: 12,
                     fontFamily: fontFamily.Poppins_Regular,
                     color:
-                      props?.promotion?.color == '#FFFFFF' ? '#000' : '#fff',
+                      props?.promotion?.color == '#FFFFFF' ? '#fff' : '#000',
                   }}>
                   {/* Ad */}
                   {TranslationStrings.AD}
@@ -162,13 +174,14 @@ const DashboardCard = props => {
               <View
                 style={{
                   backgroundColor: props?.promotion?.color
-                    ? Colors.Appthemecolor
+                    ? '#90EE90'
                     : '#576AF4',
                   position: 'absolute',
                   left: 0,
                   borderBottomRightRadius: 8,
-                  paddingHorizontal: 15,
-                  paddingTop: 3,
+                  borderTopLeftRadius: 8,
+                  paddingHorizontal: 21,
+                  paddingVertical: 3,
                   // borderRadius: hp(1),
                 }}>
                 <Text
@@ -176,7 +189,7 @@ const DashboardCard = props => {
                     fontSize: 12,
                     fontFamily: fontFamily.Poppins_Regular,
                     color:
-                      props?.promotion?.color == '#FFFFFF' ? '#000' : '#fff',
+                      props?.promotion?.color == '#FFFFFF' ? '#fff' : '#000',
                   }}>
                   {/* Urgent */}
                   {TranslationStrings.URGENT}
@@ -214,6 +227,7 @@ const DashboardCard = props => {
                 position: 'absolute',
                 right: 0,
                 borderBottomLeftRadius: 8,
+                borderTopRightRadius: 8,
                 paddingHorizontal: 8,
                 paddingTop: 3,
               }}>
@@ -310,14 +324,28 @@ const DashboardCard = props => {
             marginHorizontal: wp(3),
             borderRadius: wp(4),
           }}>
-          <Checkbox
-            status={checked ? 'checked' : 'unchecked'}
-            onPress={() => {
-              setChecked(checked);
-            }}
-            color={'red'}
-            //uncheckedColor={Colors.activetextinput}
-          />
+           <TouchableOpacity
+                  onPress={() => {
+                    setChecked(!checked);
+                  }}>
+                  {checked ? (
+                    <Icon
+                      name="checkmark"
+                      size={28}
+                      color={checked ? Colors.activetextinput : 'white'}
+                    />
+                  ) : (
+                    <View
+                      style={{
+                        width: 22,
+                        height: 22,
+                        borderRadius: 2,
+                        borderWidth: 1,
+                        borderColor: Colors.Appthemecolor,
+                      }}
+                    />
+                  )}
+                </TouchableOpacity>
         </View>
       ) : null}
     </TouchableOpacity>

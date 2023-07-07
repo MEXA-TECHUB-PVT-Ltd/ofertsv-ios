@@ -663,11 +663,13 @@ const StripePayment = ({navigation, route}) => {
         onPress={() => {
           if (route?.params?.type == 'promote') {
             // navigation?.goBack();
-            navigation.replace('Promotions');
+            setModalVisible(false);
+            navigation.navigate('Promotions');
           } else if (route?.params?.type == 'addbanner') {
             navigation?.goBack();
             setModalVisible(false);
           } else if (route?.params?.buy_type == 'live_stream') {
+            setModalVisible(false);
             navigation.navigate('WatchLiveStream', {
               response: route?.params?.response,
               host: route?.params?.host,
